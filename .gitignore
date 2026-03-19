@@ -1,36 +1,62 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ===================
+# Python / Django
+# ===================
+backend/venv/
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/**/*.pyc
+backend/*.pyo
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/staticfiles/
+backend/mediafiles/
+backend/*.egg-info/
+backend/dist/
+backend/.env
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# ===================
+# Node / Next.js
+# ===================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+frontend/coverage/
 
-# testing
-/coverage
+# ===================
+# 環境変数（ルート）
+# ===================
+.env
+.env.*
+!.env.example
 
-# next.js
-/.next/
-/out/
+# ===================
+# Docker
+# ===================
+*.log
 
-# production
-/build
-
-# misc
+# ===================
+# OS / エディタ
+# ===================
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
 *.pem
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env*.local
-.env
-
-# vercel
+# ===================
+# Vercel
+# ===================
 .vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
