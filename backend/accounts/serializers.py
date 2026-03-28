@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User, Verification
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,3 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        if not self.user.is_verified:
+            raise serializers.ValidationError('メール認証が完了していません')
+        return data
