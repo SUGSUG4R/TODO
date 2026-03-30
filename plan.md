@@ -55,11 +55,6 @@
 - メール認証エンドポイント (`/api/auth/verify-email/<token>/`)
 - パスワードリセット (`/api/auth/password-reset/`, `/api/auth/password-reset-confirm/`)
 
-**Step 7. Swagger/OpenAPI設定**
-- drf-spectacular の設定
-- `/api/schema/` `/api/docs/` エンドポイント追加
-- 全エンドポイントがSwagger UIで確認できることを検証
-
 ---
 
 ### Phase 3: nginx設定
