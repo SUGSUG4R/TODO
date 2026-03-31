@@ -1,5 +1,6 @@
 'use client'
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
@@ -17,16 +18,23 @@ interface FormValues {
 
 export default function Page() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>()
+    const router = useRouter()
 
     const onSubmit = (data: FormValues) => {
         const { repassword, ...user } = data
-        fetch("http://localhost:8080/api/register", {
+        fetch("http://localhost:8080/api/accounts/register/", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
         })
-        .then(res => console.log(`Success: ${res}`))
-        .catch(err => console.error(err))
+        .then(res => {
+            console.log(`Success: ${res}`)
+            router.push('/register/success')
+        })
+        .catch(err => {
+            console.log(`Failure: ${err}`)
+            router.push('/register/failure')
+        })
     }
 
     return (
