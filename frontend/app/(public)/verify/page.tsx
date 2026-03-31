@@ -1,9 +1,9 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 
-export default function Verify() {
+function Verify() {
     const searchParams = useSearchParams()
 
     const query = new URLSearchParams(searchParams)
@@ -30,4 +30,12 @@ export default function Verify() {
         return <p>認証中です</p>
     }
     return <p>認証に失敗しました。</p>
+}
+
+export default function Page() {
+    return (
+        <Suspense>
+            <Verify />
+        </Suspense>
+    )
 }
