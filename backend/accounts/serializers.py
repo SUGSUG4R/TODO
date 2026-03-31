@@ -5,7 +5,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'birth_date', 'faculty', 'grade')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'faculty', 'grade')
     
     id = serializers.UUIDField(read_only=True)
     password = serializers.CharField(write_only=True)
