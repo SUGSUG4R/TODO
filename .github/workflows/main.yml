@@ -1,9 +1,37 @@
-name: GitHub Actions Demo
+name: Build
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '.github/workflows/**'
+      - 'frontend/**'
 
 jobs:
-  echo_hello_world:
+  build:
+    name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - run: echo "hello world!!"
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: 'frontend/node_modules'
+          key: node-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: node-
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Create release build
+        run: |
+          cd frontend/
+          npm install
+          npm run build
