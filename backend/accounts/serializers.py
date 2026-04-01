@@ -20,7 +20,4 @@ class LoginSerializer(UserSerializer):
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
-        data = super().validate(attrs)
-        if not self.user.is_verified:
-            raise serializers.ValidationError('メール認証が完了していません')
-        return data
+        return super().validate(attrs)

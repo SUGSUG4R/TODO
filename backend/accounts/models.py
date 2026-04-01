@@ -8,11 +8,3 @@ class User(AbstractUser):
     faculty = models.CharField(max_length=150, null=False)
     grade = models.IntegerField(null=False)
     is_verified = models.BooleanField(default=False)
-
-class Verification(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE
-    )
-    token = models.UUIDField(default=uuid.uuid4, editable=False)
-    expires = models.DateTimeField()
