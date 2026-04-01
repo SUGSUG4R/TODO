@@ -9,4 +9,5 @@ RUN dnf update -y \
     && pip3 install -r requirements.txt
 COPY . /app
 EXPOSE 8000
-CMD ["python3","manage.py","runserver","0.0.0.0:8000"]
+ENV DJANGO_SETTINGS=config.settings.dev
+CMD ["sh", "-c", "python3 manage.py runserver 0.0.0.0:8000 --settings ${DJANGO_SETTINGS}"]
