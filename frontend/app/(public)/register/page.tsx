@@ -20,21 +20,26 @@ export default function Page() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>()
     const router = useRouter()
 
-    const onSubmit = (data: FormValues) => {
+    const onSubmit = async (data: FormValues) => {
         const { repassword, ...user } = data
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/accounts/register/`, {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        })
-        .then(res => {
-            console.log(`Success: ${res}`)
-            router.push('/register/success')
-        })
-        .catch(err => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/accounts/register/`, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            })
+            if (!response.ok) {
+                const errData = await response.json()
+                console.log(errData)
+                throw new Error("Network response was not ok.");
+            }
+            console.log(`Success: ${response}`)
+            const resData = await response.json()
+            console.log(resData)
+            router.push('/accounts')
+        } catch(err) {
             console.log(`Failure: ${err}`)
-            router.push('/register/failure')
-        })
+        }
     }
 
     return (
