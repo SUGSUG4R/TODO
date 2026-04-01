@@ -20,15 +20,14 @@ services:
     volumes:
       - db_store:/var/lib/postgresql/data
   nginx:
-    image: nginx
+    image: docker.io/library/nginx:latest
     ports:
       - "8080:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - django
-    links:
-      - django
+      - node
   node:
     build: ./frontend
     ports:
