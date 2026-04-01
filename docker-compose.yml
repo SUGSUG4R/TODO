@@ -1,4 +1,4 @@
-name: "TODO_app"
+name: "TODOapp"
 
 services:
   django:
@@ -29,5 +29,9 @@ services:
       - django
     links:
       - django
+  node:
+    build: ./frontend
+    ports:
+      - "3000:3000"
 volumes:
   db_store:
