@@ -22,6 +22,7 @@ export default function Page() {
 
     const onSubmit = async (data: FormValues) => {
         const { repassword, ...user } = data
+        console.log(user)
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/accounts/register/`, {
                 method: "POST",
