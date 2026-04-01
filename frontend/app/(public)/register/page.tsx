@@ -22,7 +22,7 @@ export default function Page() {
 
     const onSubmit = (data: FormValues) => {
         const { repassword, ...user } = data
-        fetch("http://localhost:8080/api/accounts/register/", {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/accounts/register/`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)

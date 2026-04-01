@@ -14,7 +14,7 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
                 return ;
             } else if (access === null) {
                 try {
-                    const response = await fetch("http://localhost:8080/api/token/refresh/", {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/token/refresh/`, {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

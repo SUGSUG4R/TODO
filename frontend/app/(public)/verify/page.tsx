@@ -9,7 +9,7 @@ function Verify() {
     const query = new URLSearchParams(searchParams)
     const [send, setSend] = useState("loading")
     useEffect(() => {
-        fetch(`http://localhost:8080/api/accounts/verify/?${query}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/accounts/verify/?${query}`, {
             method: "GET",
             headers: { 'Content-Type': 'application/json' }
         })
