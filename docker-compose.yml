@@ -3,6 +3,7 @@ name: "TODOapp"
 services:
   django:
     build: ./backend
+    user: root
     volumes:
       - ./backend:/app
     env_file:
