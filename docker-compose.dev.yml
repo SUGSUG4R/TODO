@@ -1,0 +1,41 @@
+name: "TODOapp-dev"
+
+services:
+  django:
+    build: ./backend
+    user: root
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    environment:
+      DB_HOST: postgres
+      DJANGO_SETTINGS: config.settings.dev
+    depends_on:
+      - postgres
+  postgres:
+    image: docker.io/library/postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db_store_dev:/var/lib/postgresql/data
+  nginx:
+    image: docker.io/library/nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - django
+      - node
+  node:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+
+volumes:
+  db_store_dev:
